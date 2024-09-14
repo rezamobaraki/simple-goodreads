@@ -1,9 +1,9 @@
-name: goodreads
 version: '3.9'
+name: goodreads
 
 services:
   app:
-    container_name: app
+    container_name: goodreads_app
     image: app:latest
     build:
       context: .
@@ -34,7 +34,7 @@ services:
         max-file: "3"
 
   postgres:
-    container_name: postgres
+    container_name: goodreads_postgres
     image: postgres:16.2
     environment:
       POSTGRES_USER: postgres
