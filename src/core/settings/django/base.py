@@ -133,3 +133,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from core.settings.third_parties.cors import *  # noqa
+from core.settings.third_parties.drf import *  # noqa
+from core.settings.third_parties.jwt import *  # noqa
+from core.settings.third_parties.swagger import *  # noqa
