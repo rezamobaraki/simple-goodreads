@@ -1,65 +1,37 @@
-name: boilerplate
+name: goodreads
 version: '3.9'
 
 
 services:
   app:
-    container_name: boilerplate_app
-    image: boilerplate_app:latest
+    container_name: app
+    image: app:latest
     build:
       context: .
-      dockerfile: Dockerfile.local
+      dockerfile: Dockerfile
     command: >
       bash -c "python manage.py migrate
       && gunicorn --workers=3 --timeout=600 --bind=0.0.0.0:8000 config.wsgi:application"
     depends_on:
       - postgres
-      - redis
     env_file:
       - .compose/config.env
     networks:
-      - boilerplate
+      - goodreads
     ports:
       - "8000:8000"
     restart: always
 
-  celery:
-    container_name: boilerplate_celery
-    image: boilerplate_app:latest
-    build:
-      context: .
-      dockerfile: Dockerfile.local
-    command: bash -c "celery -A config.celery worker -l INFO"
-    depends_on:
-      - postgres
-      - redis
-    env_file:
-      - .compose/config.env
-    networks:
-      - boilerplate
-    restart: always
-
-  redis:
-    container_name: boilerplate_redis
-    image: redis:7.2
-    command: [ "redis-server", "--requirepass", "redis_password" ]
-    networks:
-      - boilerplate
-    ports:
-      - "6379:6379"
-    restart: always
-    volumes:
-      - redis-data:/data
 
   postgres:
-    container_name: boilerplate_postgres
+    container_name: postgres
     image: postgres:16.2
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: boilerplate
+      POSTGRES_DB: goodreads
     networks:
-      - boilerplate
+      - goodreads
     ports:
       - "5432:5432"
     restart: always
@@ -68,9 +40,8 @@ services:
 
 
 networks:
-  boilerplate:
+  goodreads:
     driver: bridge
 
 volumes:
   postgres-data:
-  redis-data:
