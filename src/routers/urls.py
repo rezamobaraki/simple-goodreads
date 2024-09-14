@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
@@ -21,8 +21,7 @@ swagger = [
 ]
 
 urlpatterns = [
-    path("accounts/", include("apis.accounts", namespace="accounts"), name="accounts"),
-
+    # path("accounts/", include("routers.accounts", namespace="accounts"), name="accounts"),
 ]
 
 urlpatterns += swagger
