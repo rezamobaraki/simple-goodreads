@@ -31,7 +31,9 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 # Application definition
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "common",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
