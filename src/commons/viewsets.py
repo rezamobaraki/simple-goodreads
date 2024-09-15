@@ -37,6 +37,14 @@ class CreateListModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, Gen
     pass
 
 
+class CreateRetrieveListModelViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                                     GenericViewSet):
+    """
+    A viewset that provides create, retrieve, and list actions.
+    """
+    pass
+
+
 class UpdateModelViewSet(mixins.UpdateModelMixin, GenericViewSet):
     """
     A viewset that provides update action.

@@ -1,7 +1,9 @@
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from books.models.book import Book
 from books.serialzers.review import ReviewSerializer
+from books.services.commands.bookmark import bookmark, remove_bookmark
 from books.services.queries.bookmark import bookmark_count, is_bookmarked
 from books.services.queries.review import average_rating, rating_count, rating_distribution, review_count
 
@@ -59,3 +61,18 @@ class BookDetailSerializer(serializers.ModelSerializer):
 
     def get_rating_distribution(self, obj):
         return rating_distribution(book=obj)
+
+
+class BookBookmarkSerializer(ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault(), write_only=True)
+
+    class Meta:
+        model = Book
+        fields = ('user',)
+
+    def create(self, validated_data):
+        user = validated_data['user']
+        book = self.context['book']
+        if is_bookmarked(book=book, user=user):
+            return remove_bookmark(book=book, user=user)
+        return bookmark(book=book, user=user).book
