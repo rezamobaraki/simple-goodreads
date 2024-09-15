@@ -25,3 +25,7 @@ def rating_distribution(*, book: Book) -> dict:
         distribution[rating_name] = item['count']
 
     return distribution
+
+
+def is_reviewed(*, book: Book, user) -> bool:
+    return Review.objects.filter(book=book, user=user).exists()
