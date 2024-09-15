@@ -6,6 +6,6 @@ app_name = 'authentication'
 
 router = SimpleRouter()
 
-router.register(r'', AuthenticationViewSet, basename='authentication')
+router.register(r'', AuthenticationViewSet, basename='register-login')
 
 urlpatterns = router.urls
