@@ -1,4 +1,4 @@
-### Django Boilerplate Project
+### Simplify GoodReads Project Implementation with Django
 
 This is a boilerplate project for Django, designed to help you get started quickly with a standard setup. It includes
 configurations for Poetry, PostgreSQL, and various Django apps and middleware.

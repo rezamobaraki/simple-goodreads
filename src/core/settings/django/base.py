@@ -20,7 +20,7 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+%mj_bos8s&j#*f^(v!-7f+t8)k&25!e=@hs3by-o%k0y+jz@m'
+SECRET_KEY = env.str("SECRET_KEY", "django-insecure")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,7 +31,9 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 # Application definition
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "accounts",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -127,9 +130,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = "admin:login"
+
+from core.settings.third_parties.cors import *  # noqa
+from core.settings.third_parties.drf import *  # noqa
+from core.settings.third_parties.jwt import *  # noqa
+from core.settings.third_parties.swagger import *  # noqa
