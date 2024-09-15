@@ -6,5 +6,5 @@ SWAGGER_SETTINGS = {
             'in': 'header'
         }
     },
-    'DEFAULT_AUTO_SCHEMA_CLASS': 'common.swagger.CustomSwaggerAutoSchema',
+    'DEFAULT_AUTO_SCHEMA_CLASS': 'commons.swagger.CustomSwaggerAutoSchema',
 }
