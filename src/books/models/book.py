@@ -16,18 +16,6 @@ class Book(BaseModel):
         return self.title
 
     @property
-    def bookmark_count(self):
-        return self.bookmarks.count()
-
-    @property
-    def review_count(self):
-        return self.reviews.count()
-
-    @property
-    def rating_count(self):
-        return self.reviews.exclude(rating__isnull=True).count()
-
-    @property
     def average_rating(self):
         ratings = self.reviews.exclude(rating__isnull=True).values_list('rating', flat=True)
         return sum(ratings) / len(ratings) if ratings else 0

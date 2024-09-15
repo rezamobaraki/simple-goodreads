@@ -33,6 +33,8 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 LOCAL_APPS = [
     "accounts",
+    "books",
+    "commons",
 ]
 
 THIRD_PARTY_APPS = [

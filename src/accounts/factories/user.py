@@ -10,4 +10,4 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     email = factory.Faker('email')
     username = factory.Faker('user_name')
-    password = factory.PostGenerationMethodCall('set_password', 'password')
+    password = factory.PostGenerationMethodCall('set_password', 'new_password')
