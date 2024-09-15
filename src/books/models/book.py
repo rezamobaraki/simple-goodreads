@@ -1,16 +1,11 @@
-from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from commons.models import BaseModel
 
-User = get_user_model()
-
 
 class Book(BaseModel):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True, verbose_name=_('slug'))
     summary = models.TextField()
 
     class Meta:
@@ -19,11 +14,6 @@ class Book(BaseModel):
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
 
     @property
     def bookmark_count(self):

@@ -11,7 +11,7 @@ class BookListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['id', 'title', 'bookmark_count', 'is_bookmarked']
+        fields = ('id', 'title', 'bookmark_count', 'is_bookmarked')
 
     def get_is_bookmarked(self, obj):
         user = self.context['request'].user
@@ -29,5 +29,7 @@ class BookDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['id', 'title', 'summary', 'review_count', 'rating_count', 'average_rating', 'rating_distribution',
-                  'reviews']
+        fields = (
+            'id', 'title', 'summary', 'review_count', 'rating_count',
+            'average_rating', 'rating_distribution', 'reviews'
+        )
