@@ -8,13 +8,12 @@ from books.permissions import IsAdminUserOrReadOnly
 from books.serialzers.book import (
     BookDetailSerializer, BookListSerializer, BookListWithBookmarksSerializer
 )
+from books.serialzers.bookmark import BookmarkSerializer
 from books.serialzers.review import ReviewSerializer
-from books.services.commands.book import toggle_bookmark
-from books.services.queries.review import is_reviewed
-from commons.viewsets import RetrieveListModelViewSet
+from commons.viewsets import CreateRetrieveListModelViewSet
 
 
-class BookViewSet(RetrieveListModelViewSet):
+class BookViewSet(CreateRetrieveListModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookListSerializer
     permission_classes = [IsAdminUserOrReadOnly]
@@ -25,20 +24,23 @@ class BookViewSet(RetrieveListModelViewSet):
             return BookListWithBookmarksSerializer
         if self.action == 'retrieve':
             return BookDetailSerializer
-
         return super().get_serializer_class()
 
-    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        if self.action in ['bookmark', 'review']:
+            context['user'] = self.request.user
+            context['book'] = self.get_object()
+        return context
+
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=BookmarkSerializer)
     def bookmark(self, request, *args, **kwargs):
-        user, book = request.user, self.get_object()
-        if is_reviewed(book=book, user=user):
-            return Response({"status": "Already reviewed"}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.get_serializer(data=request.data, context=self.get_serializer_context())
+        serializer.is_valid(raise_exception=True)
+        _, created = serializer.save()
+        return Response({"status": "Bookmarked" if created else "Unbookmarked"}, status=status.HTTP_200_OK)
 
-        bookmark = toggle_bookmark(user=user, book=book)
-        status_message = "Bookmarked" if bookmark else "unBookmark"
-        return Response({"status": status_message}, status=status.HTTP_200_OK)
-
-    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=ReviewSerializer)
+    @action(detail=True, methods=['post'], serializer_class=ReviewSerializer, permission_classes=[IsAuthenticated])
     def review(self, request, *args, **kwargs):
         context = self.get_serializer_context()
         context['book'] = self.get_object()
