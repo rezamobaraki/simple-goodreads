@@ -14,6 +14,3 @@ class BookmarkSerializer(ModelSerializer):
 
     def create(self, validated_data):
         return Bookmark.objects.create(**validated_data)
-
-    def delete(self, validated_data):
-        return Bookmark.objects.delete(**validated_data)

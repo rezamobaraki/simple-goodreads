@@ -1,7 +1,7 @@
 from books.models import Book, Review
 
 
-def get_review_count(*, book: Book) -> int:
+def review_count(*, book: Book) -> int:
     return Review.objects.filter(book=book).count()
 
 

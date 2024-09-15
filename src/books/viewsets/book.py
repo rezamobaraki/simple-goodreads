@@ -1,6 +1,3 @@
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
-
 from books.models import Book
 from books.permissions import IsAdminUserOrReadOnly
 from books.serialzers.book import BookDetailSerializer, BookListSerializer, BookListWithBookmarksSerializer
@@ -12,7 +9,8 @@ class BookViewSet(RetrieveListModelViewSet):
     permission_classes = [IsAdminUserOrReadOnly]
 
     def get_serializer_class(self):
-        if self.action == 'list' and self.request.user.is_authenticated:
+        user = self.request.user
+        if self.action == 'list' and user.is_authenticated:
             return BookListWithBookmarksSerializer
         elif self.action == 'list':
             return BookListSerializer

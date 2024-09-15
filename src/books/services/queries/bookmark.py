@@ -6,5 +6,5 @@ def is_bookmarked(*, book: Book, user: User) -> bool:
     return Bookmark.objects.filter(book=book, user=user).exists()
 
 
-def get_bookmark_count(*, book: Book) -> int:
+def bookmark_count(*, book: Book) -> int:
     return Bookmark.objects.filter(book=book).count()

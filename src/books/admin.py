@@ -3,8 +3,6 @@ from django.contrib import admin
 from .models.book import Book
 from .models.bookmark import Bookmark
 from .models.review import Review
-from .services.queries.bookmark import get_bookmark_count
-from .services.queries.review import get_review_count
 
 
 @admin.register(Book)
@@ -19,10 +17,12 @@ class BookAdmin(admin.ModelAdmin):
         return []
 
     def bookmark_count(self, obj):
-        return get_bookmark_count(book=obj)
+        from .services.queries.bookmark import bookmark_count
+        return bookmark_count(book=obj)
 
     def review_count(self, obj):
-        return get_review_count(book=obj)
+        from .services.queries.review import review_count
+        return review_count(book=obj)
 
     bookmark_count.short_description = 'Bookmark Count'
     review_count.short_description = 'Review Count'
