@@ -11,4 +11,4 @@ class Bookmark(BaseModel):
         unique_together = ('book', 'user')
 
     def __str__(self):
-        return f"{self.user.username}'s bookmark of {self.book.title}"
+        return f"{self.user.email}'s bookmark of {self.book.title}"
