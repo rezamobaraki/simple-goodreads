@@ -10,12 +10,11 @@ endif
 
 .PHONY: help install runserver runserver-plus migrate make-migration dump-data create-superuser db-shell shell shell-plus show-urls test lint collect-static make-messages compile-messages build prepare-compose up up-force-build down
 
-help: ## Show this help
+help: ## Show this help message
 	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
-	@echo ""
+	@echo
+	@echo "Available targets:"
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 install: ## Install dependencies
 	$(POETRY) install
