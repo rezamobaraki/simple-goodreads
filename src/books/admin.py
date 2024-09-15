@@ -24,8 +24,18 @@ class BookAdmin(admin.ModelAdmin):
         from .services.queries.review import review_count
         return review_count(book=obj)
 
+    def average_rating(self, obj):
+        from .services.queries.review import average_rating
+        return average_rating(book=obj)
+
+    def rating_distribution(self, obj):
+        from .services.queries.review import rating_distribution
+        return rating_distribution(book=obj)
+
     bookmark_count.short_description = 'Bookmark Count'
     review_count.short_description = 'Review Count'
+    average_rating.short_description = 'Average Rating'
+    rating_distribution.short_description = 'Rating Distribution'
 
 
 @admin.register(Bookmark)

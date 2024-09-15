@@ -14,16 +14,3 @@ class Book(BaseModel):
 
     def __str__(self):
         return self.title
-
-    @property
-    def average_rating(self):
-        ratings = self.reviews.exclude(rating__isnull=True).values_list('rating', flat=True)
-        return sum(ratings) / len(ratings) if ratings else 0
-
-    @property
-    def rating_distribution(self):
-        distribution = {i: 0 for i in range(1, 6)}
-        ratings = self.reviews.exclude(rating__isnull=True).values_list('rating', flat=True)
-        for rating in ratings:
-            distribution[rating] += 1
-        return distribution

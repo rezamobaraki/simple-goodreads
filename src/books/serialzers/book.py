@@ -3,6 +3,7 @@ from rest_framework import serializers
 from books.models.book import Book
 from books.serialzers.review import ReviewSerializer
 from books.services.queries.bookmark import bookmark_count, is_bookmarked
+from books.services.queries.review import average_rating, rating_count, rating_distribution, review_count
 
 
 class BookListSerializer(serializers.ModelSerializer):
@@ -34,10 +35,10 @@ class BookListWithBookmarksSerializer(BookListSerializer):
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
-    review_count = serializers.IntegerField(read_only=True)
-    rating_count = serializers.IntegerField(read_only=True)
-    average_rating = serializers.FloatField(read_only=True)
-    rating_distribution = serializers.DictField(read_only=True)
+    review_count = serializers.SerializerMethodField()
+    rating_count = serializers.SerializerMethodField()
+    average_rating = serializers.SerializerMethodField()
+    rating_distribution = serializers.SerializerMethodField()
     reviews = ReviewSerializer(many=True, read_only=True)
 
     class Meta:
@@ -46,3 +47,15 @@ class BookDetailSerializer(serializers.ModelSerializer):
             'id', 'title', 'summary', 'review_count', 'rating_count',
             'average_rating', 'rating_distribution', 'reviews'
         )
+
+    def get_review_count(self, obj):
+        return review_count(book=obj)
+
+    def get_rating_count(self, obj):
+        return rating_count(book=obj)
+
+    def get_average_rating(self, obj):
+        return average_rating(book=obj)
+
+    def get_rating_distribution(self, obj):
+        return rating_distribution(book=obj)
