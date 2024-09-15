@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
         # Ensure uniqueness (extremely unlikely to be needed, but included for robustness)
         while self.model.objects.filter(username=username).exists():
             unique_id = uuid.uuid4().hex[:10]
-            username = f"user_{timestamp}_{unique_id}"
+            username = f"user_{timestamp}.{unique_id}"
 
         return username
 
@@ -68,5 +68,5 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if not self.username:
-            self.username = self.objects.generate_unique_username()
+            self.username = User.objects.generate_unique_username()
         super().save(*args, **kwargs)
