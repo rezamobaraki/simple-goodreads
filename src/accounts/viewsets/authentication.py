@@ -1,8 +1,9 @@
 from rest_framework import status
 
 from accounts.serialzers import AuthenticationRequestSerializer
+from commons.mixins import FixStatusMixin
 from commons.throttles import AuthenticationRateThrottle
-from commons.viewsets import CreateModelViewSet, FixStatusMixin
+from commons.viewsets import CreateModelViewSet
 
 
 class AuthenticationViewSet(FixStatusMixin, CreateModelViewSet):

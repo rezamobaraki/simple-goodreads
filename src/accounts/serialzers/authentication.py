@@ -15,12 +15,12 @@ class AuthenticationRequestSerializer(serializers.Serializer):
     access_token = serializers.CharField(read_only=True)
     refresh_token = serializers.CharField(read_only=True)
 
-    def validate(self, values):
-        user = auth_create_user(email=values["email"], password=values["password"])
+    def validate(self, attrs):
+        user = auth_create_user(email=attrs["email"], password=attrs["password"])
         if not user:
             raise serializers.ValidationError("Invalid email or password")
-        self.validated_data["user"] = user
-        return values
+        attrs["user"] = user
+        return attrs
 
     def create(self, validated_data):
         user = validated_data["user"]

@@ -33,6 +33,8 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 LOCAL_APPS = [
     "accounts",
+    "books",
+    "commons",
 ]
 
 THIRD_PARTY_APPS = [
@@ -108,11 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
         "OPTIONS": {
-            "min_length": 12,
-            "special_characters": True,
-            "numeric": True,
-            "upper": True,
-            "lower": True,
+            "min_length": 6,
         },
     },
     {
