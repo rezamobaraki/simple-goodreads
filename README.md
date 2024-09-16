@@ -136,7 +136,7 @@ POSTGRES_NAME = goodreads
 POSTGRES_USER = postgres
 POSTGRES_PASSWORD = postgres
 POSTGRES_HOST = goodreads_postgres
-POSTGRES_PORT = 5433
+POSTGRES_PORT = 5432 # default port for postgres in container, external port is 5433
 JWT_SECRET_KEY = your_jwt_secret_key
 ```
 
@@ -208,14 +208,14 @@ The project comes with predefined data for seeding the database. The data includ
 
 ## API Documentation
 
-Admin panel is available at `/admin/` with the following credentials:
-
-- Email: `admin@admin.com` Password: `admin`
-
 This project comes with automatically generated API documentation using Swagger and ReDoc.
 
 - **Swagger UI**: Available at `/api/v1/swagger/`
 - **ReDoc UI**: Available at `/api/v1/redoc/`
+
+You can also access the API documentation by postman collection in the docs directory.
+
+- **Postman Collection**: Available at `/docs/Goodreads.postman_collection.json`
 
 Example API routes include:
 
@@ -224,6 +224,10 @@ Example API routes include:
     - `GET /api/v1/books/{id}/` - Retrieve a specific book.
     - `POST /api/v1/books/{id}/bookmark/` - Bookmark a book.
     - `POST /api/v1/books/{id}/review/` - Add a review to a book.
+
+Admin panel is available at `/admin/` with the following credentials:
+
+- Email: `admin@admin.com` Password: `admin`
 
 ## Running Tests
 
