@@ -14,7 +14,7 @@ interactions with them.
 - [Environment Variables](#environment-variables)
 - [Makefile Commands](#makefile-commands)
 - [Seed Data](#seed-data)
-- [Data] (#data)
+- [Data](#data)
 - [API Documentation](#api-documentation)
 - [Running Tests](#running-tests)
 - [Contact](#contact)
