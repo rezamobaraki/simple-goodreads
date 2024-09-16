@@ -10,13 +10,14 @@ from books.serialzers.book import (
 )
 from books.serialzers.bookmark import BookmarkSerializer
 from books.serialzers.review import ReviewSerializer
-from commons.viewsets import CreateRetrieveListModelViewSet
+from commons.viewsets import RetrieveListModelViewSet
 
 
-class BookViewSet(CreateRetrieveListModelViewSet):
+class BookViewSet(RetrieveListModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookListSerializer
     permission_classes = [IsAdminUserOrReadOnly]
+    lookup_field = 'pk'
 
     def get_serializer_class(self):
         user = self.request.user
@@ -26,28 +27,21 @@ class BookViewSet(CreateRetrieveListModelViewSet):
             return BookDetailSerializer
         return super().get_serializer_class()
 
-    def get_serializer_context(self):
-        context = super().get_serializer_context()
-        if self.action in ['bookmark', 'review']:
-            context['user'] = self.request.user
-            context['book'] = self.get_object()
-        return context
-
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=BookmarkSerializer)
     def bookmark(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data, context=self.get_serializer_context())
+        book = self.get_object()
+        serializer = self.get_serializer(context={'book': book})
         serializer.is_valid(raise_exception=True)
-        _, created = serializer.save()
-        return Response({"status": "Bookmarked" if created else "Unbookmarked"}, status=status.HTTP_200_OK)
+        data = serializer.save()
+        return Response(data, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['post'], serializer_class=ReviewSerializer, permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=ReviewSerializer)
     def review(self, request, *args, **kwargs):
-        context = self.get_serializer_context()
-        context['book'] = self.get_object()
-        serializer = self.get_serializer(data=request.data, context=context)
+        book = self.get_object()
+        serializer = self.get_serializer(data=request.data, context={'book': book})
         serializer.is_valid(raise_exception=True)
-        review, created = serializer.create(validated_data=serializer.data)
-        Response({
+        review, created = serializer.create(validated_data=serializer.validated_data)
+        return Response({
             'status': 'review created' if created else 'review updated',
             'review': serializer.data
         }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)

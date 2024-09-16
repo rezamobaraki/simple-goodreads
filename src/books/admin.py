@@ -5,11 +5,22 @@ from .models.bookmark import Bookmark
 from .models.review import Review
 
 
+class ReviewInline(admin.TabularInline):
+    model = Review
+    extra = 2
+
+
+class BookmarkInline(admin.TabularInline):
+    model = Bookmark
+    extra = 2
+
+
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'bookmark_count', 'review_count', 'average_rating')
     search_fields = ('title',)
     readonly_fields = ('bookmark_count', 'review_count', 'average_rating', 'rating_distribution')
+    inlines = [ReviewInline, BookmarkInline]
 
     def get_readonly_fields(self, request, obj=None):
         if obj:

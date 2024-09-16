@@ -1,20 +1,21 @@
 from rest_framework import serializers
 
-from books.services.commands.bookmark import bookmark, remove_bookmark
-from books.services.queries.bookmark import is_bookmarked
+from books.enums import BookmarkStatus
+from books.services.commands.book import bookmark_book
 from books.services.queries.review import is_reviewed
 
 
 class BookmarkSerializer(serializers.Serializer):
+    status = serializers.CharField(read_only=True)
+
     def validate(self, attrs):
-        user, book = self.context['user'], self.context['book']
-        if is_reviewed(book=book, user=user):
+        attrs['user'] = self.context['request'].user
+        attrs['book'] = self.context['book']
+        if is_reviewed(book=attrs['user'], user=attrs['book']):
             raise serializers.ValidationError('Already reviewed')
         return attrs
 
     def create(self, validated_data):
-        user, book = self.context['user'], self.context['book']
-        created = True
-        if is_bookmarked(book=book, user=user):
-            return remove_bookmark(book=book, user=user), not created
-        return bookmark(user=user, book=book), created
+        bookmark, created = bookmark_book(user=validated_data['user'], book=validated_data['book'])
+        validated_data['status'] = BookmarkStatus.CREATED if created else BookmarkStatus.DELETED
+        return validated_data

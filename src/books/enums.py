@@ -16,3 +16,11 @@ class ReviewRating(models.IntegerChoices):
     def validate_choice(cls, value: str):
         if not any(value == choice.value for choice in cls):
             raise ValueError(f"Invalid choice: {value}. Valid choices are: {[choice.value for choice in cls]}")
+
+
+class BookmarkStatus(models.TextChoices):
+    CREATED = 'bookmarked', _("Bookmarked")
+    DELETED = 'removed_bookmark', _("Removed Bookmark")
+
+    def __str__(self):
+        return self.label

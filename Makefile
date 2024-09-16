@@ -32,7 +32,7 @@ make-migration: ## Create a migration
 	$(POETRY) run $(MANAGE) makemigrations
 
 dump-data: ## Dump data
-	$(POETRY) run $(MANAGE) dumpdata
+	$(POETRY) run $(MANAGE) dumpdata $(ARGS)
 
 create-superuser: ## Create a superuser
 	$(POETRY) run $(MANAGE) createsuperuser

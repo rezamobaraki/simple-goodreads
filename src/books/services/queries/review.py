@@ -1,4 +1,4 @@
-from django.db.models import Avg, Count
+from django.db.models import Count
 
 from books.enums import ReviewRating
 from books.models import Book, Review
@@ -12,8 +12,14 @@ def rating_count(*, book: Book) -> int:
     return Review.objects.filter(book=book).exclude(rating=None).aggregate(count=Count('id'))['count']
 
 
-def average_rating(*, book: Book) -> int:
-    return Review.objects.filter(book=book).exclude(rating=None).aggregate(Avg('rating'))['rating__avg']
+from django.db.models import Avg
+from django.db.models.functions import Round
+
+
+def average_rating(*, book: Book) -> float:
+    return Review.objects.filter(book=book).exclude(rating=None).aggregate(
+        average=Round(Avg('rating'), precision=1)
+    )['average']
 
 
 def rating_distribution(*, book: Book) -> dict:
