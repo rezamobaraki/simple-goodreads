@@ -9,6 +9,10 @@ services:
       dockerfile: Dockerfile
     command: >
       bash -c "python manage.py migrate
+      && python manage.py loaddata fixtures/user.json
+      && python manage.py loaddata fixtures/book.json
+      && python manage.py loaddata fixtures/bookmark.json
+      && python manage.py loaddata fixtures/review.json
       && gunicorn --workers=3 --timeout=600 --bind=0.0.0.0:8000 core.wsgi:application"
     depends_on:
       - postgres
@@ -18,7 +22,7 @@ services:
       - goodreads
     ports:
       - "8000:8000"
-    restart: always
+    restart: unless-stopped
     volumes:
       - app-data:/app
     healthcheck:
@@ -43,7 +47,7 @@ services:
       - goodreads
     ports:
       - "5433:5432"
-    restart: always
+    restart: unless-stopped
     volumes:
       - postgres-data:/var/lib/postgresql/data
 

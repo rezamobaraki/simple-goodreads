@@ -1,0 +1,182 @@
+[
+  {
+    "model": "books.review",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-09-16T10:02:56.117Z",
+      "updated_at": "2024-09-16T10:02:56.117Z",
+      "book": 6,
+      "user": 1,
+      "rating": 5,
+      "comment": "ای کتابو برَی برنامه نویسوْی خوبوعه"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 2,
+    "fields": {
+      "created_at": "2024-09-16T10:02:56.134Z",
+      "updated_at": "2024-09-16T10:02:56.134Z",
+      "book": 6,
+      "user": 4,
+      "rating": 4,
+      "comment": "بهترینه"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 3,
+    "fields": {
+      "created_at": "2024-09-16T10:02:56.145Z",
+      "updated_at": "2024-09-16T10:02:56.145Z",
+      "book": 6,
+      "user": 3,
+      "rating": 1,
+      "comment": "یا ساخم راهی آخ"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 4,
+    "fields": {
+      "created_at": "2024-09-16T10:11:35.992Z",
+      "updated_at": "2024-09-16T10:11:35.992Z",
+      "book": 1,
+      "user": 1,
+      "rating": 4,
+      "comment": "دیپ شدم تو وورکو ><"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 5,
+    "fields": {
+      "created_at": "2024-09-16T10:11:36.003Z",
+      "updated_at": "2024-09-16T10:11:36.003Z",
+      "book": 1,
+      "user": 6,
+      "rating": 3,
+      "comment": "زیبا"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 6,
+    "fields": {
+      "created_at": "2024-09-16T10:12:13.552Z",
+      "updated_at": "2024-09-16T10:12:13.552Z",
+      "book": 2,
+      "user": 5,
+      "rating": 1,
+      "comment": "همیطوووری الکی"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 7,
+    "fields": {
+      "created_at": "2024-09-16T10:13:46.143Z",
+      "updated_at": "2024-09-16T10:13:46.143Z",
+      "book": 4,
+      "user": 3,
+      "rating": 4,
+      "comment": ""
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 8,
+    "fields": {
+      "created_at": "2024-09-16T10:13:46.154Z",
+      "updated_at": "2024-09-16T10:13:46.154Z",
+      "book": 4,
+      "user": 6,
+      "rating": 4,
+      "comment": ""
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 9,
+    "fields": {
+      "created_at": "2024-09-16T10:13:46.164Z",
+      "updated_at": "2024-09-16T10:17:17.552Z",
+      "book": 4,
+      "user": 1,
+      "rating": 2,
+      "comment": "کتاب تمیزیه"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 10,
+    "fields": {
+      "created_at": "2024-09-16T10:13:46.175Z",
+      "updated_at": "2024-09-16T10:13:46.175Z",
+      "book": 4,
+      "user": 5,
+      "rating": 2,
+      "comment": ""
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 11,
+    "fields": {
+      "created_at": "2024-09-16T10:15:02.895Z",
+      "updated_at": "2024-09-16T10:15:02.895Z",
+      "book": 3,
+      "user": 1,
+      "rating": 5,
+      "comment": "دااااغووونوم کِرد ای کتابو"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 12,
+    "fields": {
+      "created_at": "2024-09-16T10:15:02.906Z",
+      "updated_at": "2024-09-16T10:15:02.906Z",
+      "book": 3,
+      "user": 5,
+      "rating": 5,
+      "comment": "ترجیح میدم تو لحظه خوبو باشم"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 13,
+    "fields": {
+      "created_at": "2024-09-16T10:16:31.184Z",
+      "updated_at": "2024-09-16T10:16:31.184Z",
+      "book": 5,
+      "user": 1,
+      "rating": 1,
+      "comment": "خوشوم نیمد"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 14,
+    "fields": {
+      "created_at": "2024-09-16T10:16:31.195Z",
+      "updated_at": "2024-09-16T10:16:31.195Z",
+      "book": 5,
+      "user": 3,
+      "rating": 1,
+      "comment": "الکی اِسِدَمش پولوم پس بده"
+    }
+  },
+  {
+    "model": "books.review",
+    "pk": 15,
+    "fields": {
+      "created_at": "2024-09-16T10:16:31.206Z",
+      "updated_at": "2024-09-16T10:16:31.206Z",
+      "book": 5,
+      "user": 5,
+      "rating": 1,
+      "comment": "خدا از نویسندش نگذره"
+    }
+  }
+]

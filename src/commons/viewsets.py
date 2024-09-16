@@ -37,6 +37,14 @@ class CreateListModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, Gen
     pass
 
 
+class CreateRetrieveListModelViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                                     GenericViewSet):
+    """
+    A viewset that provides create, retrieve, and list actions.
+    """
+    pass
+
+
 class UpdateModelViewSet(mixins.UpdateModelMixin, GenericViewSet):
     """
     A viewset that provides update action.
@@ -65,15 +73,3 @@ class RetrieveUpdateListModelViewSet(
     A viewset that provides retrieve, update, and list actions.
     """
     pass
-
-
-class FixStatusMixin:
-    """
-    A mixin that allows to fix the status code of the response.
-    """
-    fix_status = None
-
-    def finalize_response(self, request, response, *args, **kwargs):
-        if self.fix_status is not None:
-            response.status_code = self.fix_status
-        return super().finalize_response(request, response, *args, **kwargs)
