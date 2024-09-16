@@ -196,9 +196,9 @@ The project comes with predefined data for seeding the database. The data includ
 
 - Users (accounts/fixtures/users.json)
     - Email: `admin@admin.com`, Password: `admin`
+    - Email: `rezoo@gmail.com`, Password: `reza1234`
     - Email: `ali@gmail.com`, Password: `ali1234`
     - Email: `maryam@gmail.com`, Password: `mary1234`
-    - Email: `rezoo@gmail.com`, Password: `reza1234`
     - Email: `shahriar@gmail.com` Password: `shahr1234`
     - Email: `kimia@gmail.com` Password: `kimi@1234`
 
