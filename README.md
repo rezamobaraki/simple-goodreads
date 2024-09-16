@@ -1,126 +1,187 @@
-### Simplify GoodReads Project
+# Simple Goodreads API
 
-A Django-based implementation for streamlining GoodReads-like functionality.
+A simplified model of the Goodreads API built using Django and Django REST Framework (DRF). This project includes
+features like book ratings, reviews, and bookmarking, offering basic API functionality for managing books and user
+interactions with them.
 
-### Prerequisites
+## Table of Contents
 
-- Python 3.8+
-- Poetry
-- PostgreSQL
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Setup and Installation](#setup-and-installation)
+- [Docker Usage](#docker-usage)
+- [Environment Variables](#environment-variables)
+- [Makefile Commands](#makefile-commands)
+- [API Documentation](#api-documentation)
+- [Running Tests](#running-tests)
 
-### Installation
+## Project Overview
 
-1. **Clone the repository:**
-    ```sh
-    git clone <repository-url>
-    cd <repository-directory>
-    ```
+The `Simple Goodreads API` project allows users to interact with books, rate them, add reviews, and bookmark favorites.
+It also supports user authentication with JWT tokens. The project uses Docker for easy deployment and comes with an
+auto-generated Swagger UI for API documentation.
 
-2. **Install dependencies:**
-    ```sh
-    poetry install
-    ```
+## Features
 
-3. **Set up environment variables:**
-   Create a `.env` file in the root directory and add the following variables:
-    ```env
-    POSTGRES_NAME=<your-database-name>
-    POSTGRES_USER=<your-database-user>
-    POSTGRES_PASSWORD=<your-database-password>
-    POSTGRES_HOST=localhost
-    POSTGRES_PORT=5432
-    ALLOWED_HOSTS=*
-    CSRF_TRUSTED_ORIGINS=
-    ```
+- User authentication (JWT)
+- Book management (list, retrieve, bookmark)
+- Book reviews and ratings
+- Swagger UI and Redoc for API documentation
+- Dockerized for easy setup and deployment
 
-4. **Apply database migrations:**
-    ```sh
-    poetry run python src/manage.py migrate
-    ```
-
-5. **Create a superuser:**
-    ```sh
-    poetry run python src/manage.py createsuperuser
-    ```
-
-### Usage
-
-- **Run the development server:**
-    ```sh
-    poetry run python src/manage.py runserver
-    ```
-
-- **Run tests:**
-    ```sh
-    poetry run python src/manage.py test
-    ```
-
-- **Run linters:**
-    ```sh
-    poetry run flake8 src/
-    ```
-
-### Makefile Commands
-
-This project includes a `Makefile` for common tasks:
-
-- `make install`: Install dependencies
-- `make runserver`: Run the Django development server
-- `make migrate`: Apply database migrations
-- `make make-migration`: Create a migration
-- `make dump-data`: Dump data
-- `make create-superuser`: Create a superuser
-- `make db-shell`: Run the Django database shell
-- `make shell`: Run the Django shell
-- `make show-urls`: Show all URLs
-- `make test`: Run tests
-- `make lint`: Run linters
-- `make collect-static`: Collect static files
-- `make make-messages`: Create messages
-- `make compile-messages`: Compile messages
-
-### Docker Commands
-
-This project includes Docker support with the following commands:
-
-- `make build`: Build the Docker image
-- `make build-local`: Build the Docker image using the local Dockerfile
-- `make up`: Start the Docker containers
-- `make up-force-build`: Start the Docker containers with a forced build
-- `make down`: Stop the Docker containers
-
-### Project Structure
+## Project Structure
 
 ```
+.
 ├── Dockerfile
 ├── Makefile
 ├── README.md
+├── config.env
 ├── config.example.env
 ├── docker-compose.yaml
-├── poetry.lock
-├── pyproject.toml
-└── src
-    ├── core
-    │   ├── __init__.py
-    │   ├── asgi.py
-    │   ├── env.py
-    │   ├── settings
-    │   │   ├── __init__.py
-    │   │   ├── django
-    │   │   │   ├── __init__.py
-    │   │   │   ├── base.py
-    │   │   │   ├── local.py
-    │   │   │   ├── production.py
-    │   │   │   └── test.py
-    │   │   └── third_parties
-    │   │       ├── __init__.py
-    │   │       ├── drf.py
-    │   │       └── jwt.py
-    │   ├── urls.py
-    │   └── wsgi.py
-    └── manage.py
+├── src/
+│   ├── accounts/
+│   ├── books/
+│   ├── commons/
+│   ├── core/
+│   ├── fixtures/
+│   ├── manage.py
+│   └── routers/
 ```
 
-### License
+- `accounts/`: Handles user authentication and registration.
+- `books/`: Manages books, reviews, ratings, and bookmarks.
+- `commons/`: Common utilities and middlewares.
+- `core/`: Core settings, configurations, and entry points.
+- `fixtures/`: Predefined data for database seeding.
+- `routers/`: API routing and versioning.
 
-This project is licensed under the MIT License..
+## Setup and Installation
+
+### Requirements
+
+- Docker
+- Docker Compose
+- Python 3.8+
+- Poetry (for dependency management)
+
+### Local Development
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/MrRezoo/simple-goodreads.git
+   cd simple-goodreads
+   ```
+
+2. Install dependencies using Poetry:
+
+   ```bash
+   poetry install
+   ```
+
+3. Set up the environment variables:
+
+   ```bash
+   cp config.example.env config.env
+   ```
+
+4. Start the development server:
+
+   ```bash
+   make runserver
+   ```
+
+### Using Docker
+
+1. Prepare the Docker environment:
+
+   ```bash
+   make prepare-compose
+   ```
+
+2. Start the Docker containers:
+
+   ```bash
+   make up
+   ```
+
+3. To rebuild and start:
+
+   ```bash
+   make up-force-build
+   ```
+
+4. To stop the containers:
+
+   ```bash
+   make down
+   ```
+
+## Environment Variables
+
+Ensure the following environment variables are set in the `config.env` file:
+
+```ini
+SECRET_KEY = django-insecure
+DEBUG = True
+LOGLEVEL = info
+ALLOWED_HOSTS = 0.0.0.0,127.0.0.1,localhost
+POSTGRES_NAME = goodreads
+POSTGRES_USER = postgres
+POSTGRES_PASSWORD = postgres
+POSTGRES_HOST = goodreads_postgres
+POSTGRES_PORT = 5433
+JWT_SECRET_KEY = your_jwt_secret_key
+```
+
+## Makefile Commands
+
+This project uses a `Makefile` to automate common tasks:
+
+| Command                 | Description                                     |
+|-------------------------|-------------------------------------------------|
+| `make help`             | Show available make commands                    |
+| `make install`          | Install all dependencies using Poetry           |
+| `make runserver`        | Run Django development server                   |
+| `make runserver-plus`   | Run Django server with enhanced debugging tools |
+| `make migrate`          | Apply database migrations                       |
+| `make make-migration`   | Create new migration files                      |
+| `make dump-data`        | Dump the current database data                  |
+| `make create-superuser` | Create a Django superuser                       |
+| `make db-shell`         | Open the database shell                         |
+| `make shell`            | Open Django shell                               |
+| `make shell-plus`       | Open enhanced Django shell with SQL logging     |
+| `make show-urls`        | Display all registered URLs                     |
+| `make test`             | Run tests                                       |
+| `make lint`             | Run linters (flake8)                            |
+| `make collect-static`   | Collect static files                            |
+| `make build`            | Build the Docker image                          |
+| `make up`               | Start Docker containers                         |
+| `make up-force-build`   | Rebuild and start Docker containers             |
+| `make down`             | Stop the Docker containers                      |
+
+## API Documentation
+
+This project comes with automatically generated API documentation using Swagger and ReDoc.
+
+- **Swagger UI**: Available at `/api/v1/swagger/`
+- **ReDoc UI**: Available at `/api/v1/redoc/`
+
+Example API routes include:
+
+- `GET /api/v1/accounts/` - User registration and authentication.
+- `GET /api/v1/books/` - Retrieve, bookmark, and rate books.
+
+## Running Tests
+
+To run the tests, execute:
+
+```bash
+make test
+```
+
+## License
+
+This project is licensed under the BSD License.
