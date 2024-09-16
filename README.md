@@ -15,6 +15,7 @@ interactions with them.
 - [Makefile Commands](#makefile-commands)
 - [API Documentation](#api-documentation)
 - [Running Tests](#running-tests)
+- [Contact](#contact)
 
 ## Project Overview
 
@@ -185,3 +186,10 @@ make test
 ## License
 
 This project is licensed under the BSD License.
+
+## Contact
+
+For any inquiries or issues, please contact:
+
+- Name: Reza M.
+- Email: rezam578@gmail.com
