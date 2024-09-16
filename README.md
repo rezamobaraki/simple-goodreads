@@ -13,13 +13,15 @@ interactions with them.
 - [Docker Usage](#docker-usage)
 - [Environment Variables](#environment-variables)
 - [Makefile Commands](#makefile-commands)
+- [Seed Data](#seed-data)
 - [API Documentation](#api-documentation)
 - [Running Tests](#running-tests)
 - [Contact](#contact)
 
 ## Project Overview
 
-The `Simple Goodreads API` project allows users to interact with books, rate them, add reviews, and bookmark favorites.
+The `Simple Goodreads API` project allows users to interact with books, review them, add reviews, and bookmark
+favorites.
 It also supports user authentication with JWT tokens. The project uses Docker for easy deployment and comes with an
 auto-generated Swagger UI for API documentation.
 
@@ -162,6 +164,25 @@ This project uses a `Makefile` to automate common tasks:
 | `make up`               | Start Docker containers                         |
 | `make up-force-build`   | Rebuild and start Docker containers             |
 | `make down`             | Stop the Docker containers                      |
+| `make prepare-compose`  | Prepare Docker Compose environment              |
+| `make seeder`           | Seed the database with initial data             |
+| `make load-data`        | Load fixtures data into the database            |
+
+## Seed Data
+
+To seed the database with initial data, run the following command:
+
+```bash
+ make seeder ARGS="--user=<user_count> --book=<book_count> --review=<review_count> --bookmark=<bookmark_count>"
+```
+
+or you can use fixtures data by running the following command:
+
+```bash
+ python manage.py loaddata fixtures/<fixture_name>.json
+# or
+  make load-data ARGS="fixtures/<fixture_name>.json"
+```
 
 ## API Documentation
 
@@ -172,8 +193,11 @@ This project comes with automatically generated API documentation using Swagger 
 
 Example API routes include:
 
-- `GET /api/v1/accounts/` - User registration and authentication.
-- `GET /api/v1/books/` - Retrieve, bookmark, and rate books.
+- `GET /api/v1/accounts/auth/` - User registration and authentication.
+- `GET /api/v1/books/` - List, Retrieve, bookmark, and Review books.
+    - `GET /api/v1/books/{id}/` - Retrieve a specific book.
+    - `POST /api/v1/books/{id}/bookmark/` - Bookmark a book.
+    - `POST /api/v1/books/{id}/review/` - Add a review to a book.
 
 ## Running Tests
 

@@ -8,7 +8,7 @@ ifneq (,$(wildcard $(ENV_FILE)))
     export $(shell sed 's/=.*//' $(ENV_FILE))
 endif
 
-.PHONY: help install runserver runserver-plus migrate make-migration dump-data create-superuser db-shell shell shell-plus show-urls test lint collect-static make-messages compile-messages build prepare-compose up up-force-build down
+.PHONY: help install runserver runserver-plus migrate make-migration dump-data create-superuser db-shell shell shell-plus show-urls test lint collect-static make-messages compile-messages build prepare-compose up up-force-build down seeder load-data
 
 help: ## Show this help message
 	@echo "Usage: make [target]"
@@ -33,6 +33,9 @@ make-migration: ## Create a migration
 
 dump-data: ## Dump data
 	$(POETRY) run $(MANAGE) dumpdata $(ARGS)
+
+load-data: ## Load data
+	$(POETRY) run $(MANAGE) loaddata $(ARGS)
 
 create-superuser: ## Create a superuser
 	$(POETRY) run $(MANAGE) createsuperuser
@@ -86,3 +89,6 @@ up-force-build: prepare-compose ## Start the Docker containers and force a rebui
 
 down: ## Stop the Docker containers
 	sudo docker-compose down
+
+seeder: ## Run the seeder
+	$(POETRY) run $(MANAGE) seeder $(ARGS)
