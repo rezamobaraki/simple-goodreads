@@ -14,6 +14,7 @@ interactions with them.
 - [Environment Variables](#environment-variables)
 - [Makefile Commands](#makefile-commands)
 - [Seed Data](#seed-data)
+- [Data] (#data)
 - [API Documentation](#api-documentation)
 - [Running Tests](#running-tests)
 - [Contact](#contact)
@@ -170,11 +171,16 @@ This project uses a `Makefile` to automate common tasks:
 
 ## Seed Data
 
+#### Attention: If you are using Docker-Compose,
+
+```bash
 To seed the database with initial data, run the following command:
 
 ```bash
  make seeder ARGS="--user=<user_count> --book=<book_count> --review=<review_count> --bookmark=<bookmark_count>"
 ```
+
+- in this case all user passwords are `password`
 
 or you can use fixtures data by running the following command:
 
@@ -184,7 +190,27 @@ or you can use fixtures data by running the following command:
   make load-data ARGS="fixtures/<fixture_name>.json"
 ```
 
+## Data
+
+The project comes with predefined data for seeding the database. The data includes:
+
+- Users (accounts/fixtures/users.json)
+    - Email: `admin@admin.com`, Password: `admin`
+    - Email: `ali@gmail.com`, Password: `ali1234`
+    - Email: `maryam@gmail.com`, Password: `mary1234`
+    - Email: `rezoo@gmail.com`, Password: `reza1234`
+    - Email: `shahriar@gmail.com` Password: `shahr1234`
+    - Email: `kimia@gmail.com` Password: `kimi@1234`
+
+- Books (books/fixtures/books.json)
+- Reviews (books/fixtures/reviews.json)
+- Bookmarks (books/fixtures/bookmarks.json)
+
 ## API Documentation
+
+Admin panel is available at `/admin/` with the following credentials:
+
+- Email: `admin@admin.com` Password: `admin`
 
 This project comes with automatically generated API documentation using Swagger and ReDoc.
 
@@ -215,5 +241,5 @@ This project is licensed under the BSD License.
 
 For any inquiries or issues, please contact:
 
-- Name: Reza M.
+- Name: Reza M. (@MrRezoo)
 - Email: rezam578@gmail.com
