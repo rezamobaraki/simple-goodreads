@@ -29,16 +29,16 @@ class BookViewSet(RetrieveListModelViewSet):
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=BookmarkSerializer)
     def bookmark(self, request, *args, **kwargs):
-        book = self.get_object()
-        serializer = self.get_serializer(context={'book': book})
+        book_id = kwargs.get('pk')
+        serializer = self.get_serializer(data={'book': book_id})
         serializer.is_valid(raise_exception=True)
         data = serializer.save()
         return Response(data, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=ReviewSerializer)
     def review(self, request, *args, **kwargs):
-        book = self.get_object()
-        serializer = self.get_serializer(data=request.data, context={'book': book})
+        book_id = kwargs.get('pk')
+        serializer = self.get_serializer(data={**request.data, 'book': book_id})
         serializer.is_valid(raise_exception=True)
         review, created = serializer.create(validated_data=serializer.validated_data)
         return Response({

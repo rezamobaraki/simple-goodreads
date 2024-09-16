@@ -1,1 +1,62 @@
-[{"model": "books.book", "pk": 1, "fields": {"created_at": "2024-09-16T09:46:54.510Z", "updated_at": "2024-09-16T10:11:35.980Z", "title": "Deep Work", "summary": "Rules for Focused Success in a Distracted World by Cal Newport is a highly acclaimed book that explores the importance of deep work in today's age of constant distractions. Newport argues that the ability to focus without interruption on a cognitively demanding task is essential for achieving significant accomplishments."}}, {"model": "books.book", "pk": 2, "fields": {"created_at": "2024-09-16T09:47:17.487Z", "updated_at": "2024-09-16T10:18:53.202Z", "title": "Atomic Habits", "summary": "Atomic Habits by James Clear is another popular book that focuses on habit formation and change. Clear presents a practical and actionable approach to building good habits and breaking bad ones, emphasizing the power of small, incremental changes."}}, {"model": "books.book", "pk": 3, "fields": {"created_at": "2024-09-16T09:48:35.379Z", "updated_at": "2024-09-16T10:15:02.883Z", "title": "The Long Game", "summary": "Peter H. Diamandis and Steven Kotler's The Long Game is a guide to navigating the rapidly changing world through exponential thinking. The authors argue that by understanding and embracing exponential growth, we can anticipate and shape the future rather than simply reacting to it."}}, {"model": "books.book", "pk": 4, "fields": {"created_at": "2024-09-16T09:49:30.423Z", "updated_at": "2024-09-16T10:17:17.541Z", "title": "Clean Code", "summary": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code."}}, {"model": "books.book", "pk": 5, "fields": {"created_at": "2024-09-16T09:50:08.767Z", "updated_at": "2024-09-16T10:16:31.172Z", "title": "The Art of Agile Development", "summary": "Extreme Programming in the Real World by Robert Martin. This book is not specifically about soft skills, but it is an excellent resource for understanding how to work effectively in agile teams."}}, {"model": "books.book", "pk": 6, "fields": {"created_at": "2024-09-16T09:52:09.357Z", "updated_at": "2024-09-16T10:18:26.896Z", "title": "Head First Software Architecture", "summary": "While there isn't a book titled \"Head First Software Architecture,\" I can provide a comprehensive summary of software architecture based on the key concepts and principles outlined in popular textbooks."}}]
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-09-16T09:46:54.510Z",
+      "updated_at": "2024-09-16T10:11:35.980Z",
+      "title": "Deep Work",
+      "summary": "Rules for Focused Success in a Distracted World by Cal Newport is a highly acclaimed book that explores the importance of deep work in today's age of constant distractions. Newport argues that the ability to focus without interruption on a cognitively demanding task is essential for achieving significant accomplishments."
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "created_at": "2024-09-16T09:47:17.487Z",
+      "updated_at": "2024-09-16T10:18:53.202Z",
+      "title": "Atomic Habits",
+      "summary": "Atomic Habits by James Clear is another popular book that focuses on habit formation and change. Clear presents a practical and actionable approach to building good habits and breaking bad ones, emphasizing the power of small, incremental changes."
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "created_at": "2024-09-16T09:48:35.379Z",
+      "updated_at": "2024-09-16T10:15:02.883Z",
+      "title": "The Long Game",
+      "summary": "Peter H. Diamandis and Steven Kotler's The Long Game is a guide to navigating the rapidly changing world through exponential thinking. The authors argue that by understanding and embracing exponential growth, we can anticipate and shape the future rather than simply reacting to it."
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "created_at": "2024-09-16T09:49:30.423Z",
+      "updated_at": "2024-09-16T10:17:17.541Z",
+      "title": "Clean Code",
+      "summary": "Even bad code can function. But if code isn't clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code."
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 5,
+    "fields": {
+      "created_at": "2024-09-16T09:50:08.767Z",
+      "updated_at": "2024-09-16T10:16:31.172Z",
+      "title": "The Art of Agile Development",
+      "summary": "Extreme Programming in the Real World by Robert Martin. This book is not specifically about soft skills, but it is an excellent resource for understanding how to work effectively in agile teams."
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 6,
+    "fields": {
+      "created_at": "2024-09-16T09:52:09.357Z",
+      "updated_at": "2024-09-16T10:18:26.896Z",
+      "title": "Head First Software Architecture",
+      "summary": "While there isn't a book titled \"Head First Software Architecture,\" I can provide a comprehensive summary of software architecture based on the key concepts and principles outlined in popular textbooks."
+    }
+  }
+]
