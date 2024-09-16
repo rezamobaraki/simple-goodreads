@@ -1,0 +1,509 @@
+{
+	"info": {
+		"_postman_id": "b4cd97fe-0629-492c-a16a-7791798a0d0c",
+		"name": "GoodReads APIs",
+		"description": "Simplified model of GoodReads APIs with Django\n\nContact Support:\n Email: rezam578@gmail.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36182462"
+	},
+	"item": [
+		{
+			"name": "accounts",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "accounts auth create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/accounts/auth/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"accounts",
+										"auth",
+										""
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/accounts/auth/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"accounts",
+												"auth",
+												""
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"email\": \"<email>\",\n  \"password\": \"<string>\",\n  \"access_token\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "bookmark",
+							"item": [
+								{
+									"name": "books bookmark",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"book\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/books/:id/bookmark/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"books",
+												":id",
+												"bookmark",
+												""
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) A unique integer value identifying this book."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"book\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/books/:id/bookmark/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"books",
+														":id",
+														"bookmark",
+														""
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"book\": \"<integer>\",\n  \"status\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "review",
+							"item": [
+								{
+									"name": "books review",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"book\": \"<integer>\",\n  \"rating\": 4,\n  \"comment\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/books/:id/review/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"books",
+												":id",
+												"review",
+												""
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) A unique integer value identifying this book."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Untitled Response",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													},
+													{
+														"key": "Authorization",
+														"value": "<API Key>",
+														"description": "Added as a part of security scheme: apikey"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"book\": \"<integer>\",\n  \"rating\": 4,\n  \"comment\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/books/:id/review/",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"books",
+														":id",
+														"review",
+														""
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"book\": \"<integer>\",\n  \"rating\": 4,\n  \"status\": \"<string>\",\n  \"comment\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "books read",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/books/:id/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"books",
+										":id",
+										""
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<integer>",
+											"description": "(Required) A unique integer value identifying this book."
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Untitled Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"value": "<API Key>",
+												"description": "Added as a part of security scheme: apikey"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/books/:id/",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"books",
+												":id",
+												""
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"title\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"review_count\": \"<string>\",\n  \"rating_count\": \"<string>\",\n  \"average_rating\": \"<string>\",\n  \"rating_distribution\": \"<string>\",\n  \"reviews\": [\n    {\n      \"book\": \"<integer>\",\n      \"rating\": 5,\n      \"status\": \"<string>\",\n      \"comment\": \"<string>\"\n    },\n    {\n      \"book\": \"<integer>\",\n      \"rating\": 3,\n      \"status\": \"<string>\",\n      \"comment\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "books list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/books/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Untitled Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "<API Key>",
+										"description": "Added as a part of security scheme: apikey"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/books/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"books",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"title\": \"<string>\",\n    \"id\": \"<uri>\",\n    \"bookmark_count\": \"<string>\"\n  },\n  {\n    \"title\": \"<string>\",\n    \"id\": \"<uri>\",\n    \"bookmark_count\": \"<string>\"\n  }\n]"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000/api/v1"
+		}
+	]
+}
