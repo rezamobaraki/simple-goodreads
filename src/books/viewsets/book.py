@@ -32,16 +32,13 @@ class BookViewSet(RetrieveListModelViewSet):
         book_id = kwargs.get('pk')
         serializer = self.get_serializer(data={'book': book_id})
         serializer.is_valid(raise_exception=True)
-        data = serializer.save()
-        return Response(data, status=status.HTTP_200_OK)
+        data, created = serializer.create(validated_data=serializer.validated_data)
+        return Response(data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated], serializer_class=ReviewSerializer)
     def review(self, request, *args, **kwargs):
         book_id = kwargs.get('pk')
         serializer = self.get_serializer(data={**request.data, 'book': book_id})
         serializer.is_valid(raise_exception=True)
-        review, created = serializer.create(validated_data=serializer.validated_data)
-        return Response({
-            'status': 'review created' if created else 'review updated',
-            'review': serializer.data
-        }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
+        data, created = serializer.create(validated_data=serializer.validated_data)
+        return Response(data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)

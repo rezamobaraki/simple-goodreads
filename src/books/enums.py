@@ -24,3 +24,11 @@ class BookmarkStatus(models.TextChoices):
 
     def __str__(self):
         return self.label
+
+
+class ReviewStatus(models.TextChoices):
+    CREATED = 'review created', _("Review Created")
+    UPDATED = 'review updated', _("Review Updated")
+
+    def __str__(self):
+        return self.label

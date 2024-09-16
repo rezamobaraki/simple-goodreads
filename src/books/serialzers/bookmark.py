@@ -23,4 +23,4 @@ class BookmarkSerializer(serializers.Serializer):
             'status': status,
             'book': validated_data['book'].id,
             'user': validated_data['user'].id
-        }
+        }, created
