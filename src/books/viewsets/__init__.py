@@ -1,3 +1,3 @@
-__all__ = ["AuthenticationViewSet"]
+__all__ = ["BookViewSet"]
 
-from accounts.viewsets.authentication import AuthenticationViewSet
+from books.viewsets.book import BookViewSet

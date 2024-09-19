@@ -1,6 +1,6 @@
 from rest_framework.routers import SimpleRouter
 
-from books.viewsets.book import BookViewSet
+from books.viewsets import BookViewSet
 
 app_name = 'book'
 
