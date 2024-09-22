@@ -278,5 +278,5 @@ make test
 
 For any inquiries or issues, please contact:
 
-- Name: Reza M. (@MrRezoo)
+- Name: Reza Mobaraki (@MrRezoo)
 - Email: [rezam578@gmail.com](mailto:rezam578@gmail.com)
