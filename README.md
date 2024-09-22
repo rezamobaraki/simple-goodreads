@@ -22,15 +22,21 @@ interactions with them.
 ## Project Overview
 
 The `Simple Goodreads API` project allows users to interact with books, review them, add reviews, and bookmark
-favorites.
-It also supports user authentication with JWT tokens. The project uses Docker for easy deployment and comes with an
-auto-generated Swagger UI for API documentation.
+favorites. It also supports user authentication with JWT tokens. The project uses Docker for easy deployment and comes
+with an auto-generated Swagger UI for API documentation.
 
 ## Features
 
 - User authentication (JWT)
 - Book management (list, retrieve, bookmark)
 - Book reviews and ratings
+- **Book Statistics**: Automatically calculates and caches book statistics such as review count, rating count, average
+  rating, and rating distribution.
+    - In addition, I outlined the New Methods for the BookStat model, including:`update_or_create_stat`
+      `get_or_calculate_stats`
+- **signals**: Automatically updates book statistics when a review is added or deleted. `calculate_stats_signal`
+- **Caching**: Utilizes Django's caching framework to cache results of various functions for improved performance.
+- **Fraud Detection**: Detects suspicious activity based on the number of rating actions within a certain time frame.
 - Swagger UI and Redoc for API documentation
 - Dockerized for easy setup and deployment
 
@@ -45,18 +51,38 @@ auto-generated Swagger UI for API documentation.
 ├── config.example.env
 ├── docker-compose.yaml
 ├── src/
-│   ├── accounts/
-│   ├── books/
-│   ├── commons/
-│   ├── core/
-│   ├── fixtures/
-│   ├── manage.py
-│   └── routers/
+│   ├── accounts/
+│   ├── books/
+│   │   ├── models/
+│   │   │   ├── book.py
+│   │   │   ├── bookmark.py
+│   │   │   ├── review.py
+│   │   │   └── stat.py
+│   │   ├── services/
+│   │   │   ├── commands/
+│   │   │   │   └── review.py
+│   │   │   ├── queries/
+│   │   │   │   └── review.py
+│   │   └── signal.py
+│   ├── commons/
+│   │   └── fraud_detection.py
+│   ├── core/
+│   │   ├── celery.py
+│   │   ├── settings/
+│   │   │   ├── django/
+│   │   │   │   └── base.py
+│   │   │   ├── third_parties/
+│   │   │   │   ├── cache.py
+│   │   │   │   ├── fraud_config.py
+│   │   │   │   └── redis_templates.py
+│   ├── fixtures/
+│   ├── manage.py
+│   └── routers/
 ```
 
 - `accounts/`: Handles user authentication and registration.
-- `books/`: Manages books, reviews, ratings, and bookmarks.
-- `commons/`: Common utilities and middlewares.
+- `books/`: Manages books, reviews, ratings, bookmarks, and book statistics.
+- `commons/`: Common utilities, including fraud detection.
 - `core/`: Core settings, configurations, and entry points.
 - `fixtures/`: Predefined data for database seeding.
 - `routers/`: API routing and versioning.
@@ -136,8 +162,22 @@ POSTGRES_NAME = goodreads
 POSTGRES_USER = postgres
 POSTGRES_PASSWORD = postgres
 POSTGRES_HOST = goodreads_postgres
-POSTGRES_PORT = 5432 # default port for postgres in container, external port is 5433
+POSTGRES_PORT = 5432
 JWT_SECRET_KEY = your_jwt_secret_key
+
+# Cache settings
+REDIS_HOST = localhost
+REDIS_PORT = 6379
+CACHE_TTL_MINUTES = 15
+CACHE_TIMEOUT = 3600
+
+# Fraud detection settings
+FRAUD_DETECTION_RATE_LIMIT_PERIOD = 3600
+FRAUD_DETECTION_MAX_RATES_PER_HOUR = 500
+FRAUD_DETECTION_SUSPICIOUS_THRESHOLD = 1000
+FRAUD_DETECTION_TIME_THRESHOLD = 10
+FRAUD_DETECTION_LAST_ACTIONS_TO_TRACK = 100
+FRAUD_DETECTION_SUSPECTED_RATES_THRESHOLD = 0.2
 ```
 
 ## Makefile Commands
@@ -174,20 +214,17 @@ This project uses a `Makefile` to automate common tasks:
 #### Attention: If you are using Docker-Compose,
 
 ```bash
-To seed the database with initial data, run the following command:
-
-```bash
  make seeder ARGS="--user=<user_count> --book=<book_count> --review=<review_count> --bookmark=<bookmark_count>"
 ```
 
-- in this case all user passwords are `password`
+- In this case, all user passwords are `password`.
 
-or you can use fixtures data by running the following command:
+Or you can use fixtures data by running the following command:
 
 ```bash
  python manage.py loaddata fixtures/<fixture_name>.json
 # or
-  make load-data ARGS="fixtures/<fixture_name>.json"
+ make load-data ARGS="fixtures/<fixture_name>.json"
 ```
 
 ## Data
@@ -199,8 +236,8 @@ The project comes with predefined data for seeding the database. The data includ
     - Email: `rezoo@gmail.com`, Password: `reza1234`
     - Email: `ali@gmail.com`, Password: `ali1234`
     - Email: `maryam@gmail.com`, Password: `mary1234`
-    - Email: `shahriar@gmail.com` Password: `shahr1234`
-    - Email: `kimia@gmail.com` Password: `kimi@1234`
+    - Email: `shahriar@gmail.com`, Password: `shahr1234`
+    - Email: `kimia@gmail.com`, Password: `kimi@1234`
 
 - Books (books/fixtures/books.json)
 - Reviews (books/fixtures/reviews.json)
@@ -213,7 +250,7 @@ This project comes with automatically generated API documentation using Swagger 
 - **Swagger UI**: Available at `/api/v1/swagger/`
 - **ReDoc UI**: Available at `/api/v1/redoc/`
 
-You can also access the API documentation by postman collection in the docs directory.
+You can also access the API documentation by Postman collection in the `docs` directory.
 
 - **Postman Collection**: Available at `/docs/Goodreads.postman_collection.json`
 
@@ -231,19 +268,14 @@ Admin panel is available at `/admin/` with the following credentials:
 
 ## Running Tests
 
-To run the tests, execute:
+To run the tests:
 
 ```bash
 make test
 ```
 
-## License
-
-This project is licensed under the BSD License.
-
 ## Contact
 
-For any inquiries or issues, please contact:
+For inquiries, contact [rezoo@gmail.com](mailto:rezoo@gmail.com)
 
-- Name: Reza M. (@MrRezoo)
-- Email: rezam578@gmail.com
+```

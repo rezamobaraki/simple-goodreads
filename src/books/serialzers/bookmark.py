@@ -17,7 +17,7 @@ class BookmarkSerializer(serializers.Serializer):
         return attrs
 
     def create(self, validated_data):
-        bookmark, created = bookmark_book(user=validated_data['user'], book=validated_data['book'])
+        bookmark, created = bookmark_book.delay(user=validated_data['user'], book=validated_data['book'])
         status = BookmarkStatus.CREATED if created else BookmarkStatus.DELETED
         return {
             'status': status,

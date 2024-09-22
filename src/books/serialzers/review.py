@@ -4,6 +4,7 @@ from rest_framework import serializers
 from books.enums import ReviewRating, ReviewStatus
 from books.models import Book
 from books.services.commands.book import review_book
+from commons.fraud_detection import FraudDetection
 
 
 class ReviewSerializer(serializers.Serializer):
@@ -17,10 +18,12 @@ class ReviewSerializer(serializers.Serializer):
         comment, rating = attrs.get('comment'), attrs.get('rating')
         if not comment or not rating:
             raise serializers.ValidationError('Comment or Rating are required', _("reviewed_book"))
+        if FraudDetection.is_fraudulent_action(attrs['book'].id):
+            raise serializers.ValidationError('Fraudulent activity detected', _("reviewed_book"))
         return attrs
 
     def create(self, validated_data):
-        review, created = review_book(
+        review, created = review_book.delay(
             user=validated_data['user'], book=validated_data["book"], rating=validated_data['rating'],
             comment=validated_data['comment']
         )
