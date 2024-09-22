@@ -276,6 +276,7 @@ make test
 
 ## Contact
 
-For inquiries, contact [rezoo@gmail.com](mailto:rezoo@gmail.com)
+For any inquiries or issues, please contact:
 
-```
+- Name: Reza M. (@MrRezoo)
+- Email: [rezam578@gmail.com](mailto:rezam578@gmail.com)
