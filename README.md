@@ -101,7 +101,7 @@ with an auto-generated Swagger UI for API documentation.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/MrRezoo/simple-goodreads.git
+   git clone https://github.com/rezamobaraki/simple-goodreads.git
    cd simple-goodreads
    ```
 
@@ -278,5 +278,5 @@ make test
 
 For any inquiries or issues, please contact:
 
-- Name: Reza Mobaraki (@MrRezoo)
+- Name: Reza Mobaraki (@rezamobaraki)
 - Email: [rezam578@gmail.com](mailto:rezam578@gmail.com)
